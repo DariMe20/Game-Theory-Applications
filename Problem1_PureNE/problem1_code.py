@@ -15,10 +15,6 @@ def read_payoff_matrix(num_strategies, player, is_player2=False):
             # Read the payoffs for Player 2's strategy i, separated by spaces
             row = list(map(int, input(
                 f"Enter the payoffs for Player {player}'s strategy {i + 1}, separated by spaces: ").split()))
-            # Ensure the number of payoffs matches the number of Player 1's strategies
-            if len(row) != num_strategies:
-                print(f"Error: You must enter {num_strategies} payoffs for each strategy.")
-                return None
             matrix.append(row)
     else:
         # For Player 1, we read payoffs row-wise (as before)
@@ -58,9 +54,9 @@ def find_pure_nash_equilibrium(player1_strategies, player2_strategies, payoffs_p
     # Take Player 2 and calculate the best response to every Player 1 strategy
     for i in range(len(player1_strategies)):
         # The max payoff is the best payoff of strategy k for player 2 when player 1 plays strategy i
-        max_payoff = max(payoffs_player2[i][k] for k in range(len(player2_strategies)))
+        max_payoff = max(payoffs_player2[k][i] for k in range(len(player2_strategies)))
         # Save the best response of player 2 in strategy with index i by searching the response that is equal to max
-        best_response_player2[i] = {k for k in range(len(player2_strategies)) if payoffs_player2[i][k] == max_payoff}
+        best_response_player2[i] = {k for k in range(len(player2_strategies)) if payoffs_player2[k][i] == max_payoff}
 
     # Now I just need to iterate through every strategy and check if i and j are simultaneously in the best response array
     for i in range(len(player1_strategies)):
