@@ -73,6 +73,7 @@ def find_pure_nash_equilibrium(player1_strategies, player2_strategies, payoffs_p
 
 # Main function to execute the game logic
 def main():
+
     # Input: number of strategies for each player
     num_strategies_player1 = int(input("Enter the number of strategies for Player 1: "))
     num_strategies_player2 = int(input("Enter the number of strategies for Player 2: "))
@@ -101,7 +102,7 @@ def main():
     end_time = time.time()
     # Output results
     if pure_ne:
-        print("\nThe Pure Nash Equilibria are:")
+        print("\nThe Pure Nash Equilibrium are:")
         for ne in pure_ne:
             print(f"(P1-{ne[0]}, P2-{ne[1]} with payoffs ({ne[2]}, {ne[3]})\n")
     else:
@@ -109,6 +110,9 @@ def main():
 
     execution_time = end_time - start_time
     print(f"Execution time was: {execution_time} seconds")
+
+    # Wait for the user to press Enter before closing
+    input("Press Enter to exit...")
 
 
 # Run the main function
