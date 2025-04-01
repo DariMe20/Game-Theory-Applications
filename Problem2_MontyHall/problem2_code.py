@@ -1,6 +1,4 @@
 import random
-import pandas as pd
-
 
 def simulate_game(N, K, strategy):
     win_count = 0
@@ -22,24 +20,18 @@ def simulate_game(N, K, strategy):
 
     return win_count / K  # Return the win probability
 
-
 def evaluate_probabilities(n, k_values):
-    # Initialize a list to store the results as rows
-    results = []
+    # Print headers for the table
+    print(f"\nEvaluations for {n} doors with different k values:")
+    print(f"{'k':<10} {'Stay Prob':<15} {'Switch Prob':<15}")
 
     for k in k_values:
         # Calculate probabilities for both strategies
         win_probability_stay = simulate_game(n, k, "stay")
         win_probability_switch = simulate_game(n, k, "switch")
 
-        # Append results as a new row to the list
-        results.append([k, f"{win_probability_stay * 100:.2f}%", f"{win_probability_switch * 100:.2f}%"])
-
-    # Convert the list of results to a DataFrame
-    df = pd.DataFrame(results, columns=['k', 'Stay Prob', 'Switch Prob'])
-    print(f"\nEvaluations for {n} doors with different k values:")
-    print(df.to_string(index=False))
-
+        # Print results for the current k value
+        print(f"{k:<10} {win_probability_stay * 100:.2f}%           {win_probability_switch * 100:<5.2f}%")
 
 def main():
     while True:
@@ -61,7 +53,6 @@ def main():
         again = input("\nDo you want to evaluate another set of doors or K values? (yes/no): ").lower()
         if again != 'yes':
             break
-
 
 if __name__ == "__main__":
     main()
